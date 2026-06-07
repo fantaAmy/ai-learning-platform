@@ -1,0 +1,128 @@
+[
+  {
+    "courseId": "ai-basics-01",
+    "title": "AI는 어떻게 배우는가",
+    "description": "머신러닝의 기본 원리를 코드 없이 이해합니다",
+    "thumbnail": "https://images.unsplash.com/photo-1677442135703-1787eea5ce01?w=800",
+    "estimatedMinutes": 25,
+    "stages": [
+      {
+        "type": "shortform",
+        "title": "AI 학습이란?",
+        "videoUrl": "https://www.youtube.com/embed/R9OHn5ZF4Uo",
+        "duration": 45,
+        "cta": "학습 시작하기"
+      },
+      {
+        "type": "microlearning",
+        "title": "머신러닝 핵심 개념",
+        "videoUrl": "https://www.youtube.com/embed/ukzFI9rgwfU",
+        "duration": 300,
+        "summary": "머신러닝은 데이터로부터 패턴을 학습하는 알고리즘입니다. 지도학습, 비지도학습, 강화학습의 세 가지 유형이 있으며, 각각 레이블된 데이터, 비레이블 데이터, 보상 신호를 사용합니다."
+      },
+      {
+        "type": "apply",
+        "title": "퀴즈 & 실습 미션",
+        "quiz": [
+          {
+            "q": "머신러닝에서 '지도학습'이란 무엇인가요?",
+            "options": ["레이블 없는 데이터로 패턴 발견", "레이블 있는 데이터로 예측 모델 학습", "보상을 통해 행동 최적화", "규칙을 직접 프로그래밍"],
+            "answer": 1,
+            "explain": "지도학습은 정답(레이블)이 있는 데이터를 사용해 입력→출력 관계를 학습합니다."
+          },
+          {
+            "q": "딥러닝은 머신러닝의 한 종류이다",
+            "options": ["O", "X"],
+            "answer": 0,
+            "explain": "딥러닝은 다층 신경망을 사용하는 머신러닝의 하위 분야입니다."
+          }
+        ],
+        "mission": {
+          "tool": "Teachable Machine",
+          "url": "https://teachablemachine.withgoogle.com/",
+          "checklist": [
+            "Teachable Machine 사이트 접속",
+            "이미지 프로젝트 선택",
+            "카메라로 2가지 클래스 학습",
+            "모델 훈련 완료 확인"
+          ]
+        }
+      },
+      {
+        "type": "deepdive",
+        "title": "신경망 심화 이해",
+        "videoUrl": "https://www.youtube.com/embed/aircAruvnKk",
+        "duration": 900,
+        "chapters": [
+          { "time": "0:00", "title": "신경망 기초" },
+          { "time": "3:30", "title": "활성화 함수" },
+          { "time": "7:00", "title": "역전파 알고리즘" },
+          { "time": "12:00", "title": "실제 응용 사례" }
+        ],
+        "references": [
+          { "title": "3Blue1Brown 신경망 시리즈", "url": "https://www.youtube.com/playlist?list=PLZHQObOWTQDNU6R1_67000Dx_ZCJB-3pi" },
+          { "title": "Google ML Crash Course", "url": "https://developers.google.com/machine-learning/crash-course" }
+        ]
+      }
+    ]
+  },
+  {
+    "courseId": "ai-basics-02",
+    "title": "AI는 어떻게 말하는가",
+    "description": "자연어 처리와 대화형 AI의 원리를 이해합니다",
+    "thumbnail": "https://images.unsplash.com/photo-1675557009483-3c7e55dc0e39?w=800",
+    "estimatedMinutes": 30,
+    "stages": [
+      {
+        "type": "shortform",
+        "title": "언어 AI 소개",
+        "videoUrl": "https://www.youtube.com/embed/X-AWdfSFCHQ",
+        "duration": 45,
+        "cta": "학습 시작하기"
+      },
+      {
+        "type": "microlearning",
+        "title": "트랜스포머 모델 이해",
+        "videoUrl": "https://www.youtube.com/embed/SZorAJ4I-sA",
+        "duration": 300,
+        "summary": "트랜스포머는 어텐션 메커니즘을 활용해 문장의 맥락을 이해하는 모델입니다. GPT, BERT 등 대부분의 최신 언어 모델의 기반이 됩니다."
+      },
+      {
+        "type": "apply",
+        "title": "퀴즈 & 실습 미션",
+        "quiz": [
+          {
+            "q": "ChatGPT와 같은 대형 언어 모델(LLM)의 기반 구조는?",
+            "options": ["CNN(합성곱 신경망)", "RNN(순환 신경망)", "트랜스포머", "결정 트리"],
+            "answer": 2,
+            "explain": "GPT는 Generative Pre-trained Transformer의 약자로, 트랜스포머 아키텍처를 기반으로 합니다."
+          }
+        ],
+        "mission": {
+          "tool": "Hugging Face",
+          "url": "https://huggingface.co/spaces",
+          "checklist": [
+            "Hugging Face Spaces 접속",
+            "텍스트 생성 모델 데모 찾기",
+            "프롬프트 입력해 텍스트 생성",
+            "결과 확인 및 비교"
+          ]
+        }
+      },
+      {
+        "type": "deepdive",
+        "title": "프롬프트 엔지니어링",
+        "videoUrl": "https://www.youtube.com/embed/1bUy-1hGZpI",
+        "duration": 900,
+        "chapters": [
+          { "time": "0:00", "title": "프롬프트란?" },
+          { "time": "4:00", "title": "Few-shot 학습" },
+          { "time": "9:00", "title": "Chain of Thought" }
+        ],
+        "references": [
+          { "title": "OpenAI 프롬프트 엔지니어링 가이드", "url": "https://platform.openai.com/docs/guides/prompt-engineering" }
+        ]
+      }
+    ]
+  }
+]
