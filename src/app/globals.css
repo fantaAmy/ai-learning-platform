@@ -1,8 +1,14 @@
 @import "tailwindcss";
 
 :root {
-  --background: #f9fafb;
-  --foreground: #171717;
+  --background: #141414;
+  --foreground: #ffffff;
+  --card: #1f1f1f;
+  --card-hover: #2a2a2a;
+  --border: #333333;
+  --accent: #E50914;
+  --accent-hover: #f40612;
+  --muted: #999999;
 }
 
 @theme inline {
@@ -16,4 +22,12 @@ body {
   font-family:
     ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto,
     "Apple SD Gothic Neo", "Malgun Gothic", sans-serif;
+}
+
+.netflix-card {
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+.netflix-card:hover {
+  transform: scale(1.03);
+  box-shadow: 0 20px 40px rgba(0,0,0,0.6);
 }

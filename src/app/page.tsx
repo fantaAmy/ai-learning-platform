@@ -4,72 +4,75 @@ import { courses } from "@/lib/courses";
 
 const FEATURES = [
   {
-    emoji: "⚡",
-    title: "45초 숏폼으로 시작",
-    desc: "부담 없이 짧은 영상으로 핵심을 먼저 잡습니다.",
+    icon: "⚡",
+    title: "45초 훑어보기",
+    desc: "핵심만 쏙. 부담 없이 첫 발을 뗍니다.",
   },
   {
-    emoji: "🧩",
-    title: "4단계 몰입 학습",
-    desc: "숏폼 → 마이크로러닝 → 적용 → 심화로 자연스럽게 깊어집니다.",
+    icon: "🔥",
+    title: "4단계 몰입 구조",
+    desc: "훑어보기 → 파고들기 → 써먹기 → 제대로 파기. 자연스럽게 깊어집니다.",
   },
   {
-    emoji: "🛠️",
-    title: "직접 해보는 실습",
-    desc: "Teachable Machine, Hugging Face 등 실제 도구로 체험합니다.",
+    icon: "🛠️",
+    title: "바로 써먹는 실습",
+    desc: "Teachable Machine, Hugging Face로 직접 AI를 다뤄봅니다.",
   },
 ];
 
 export default function Home() {
   return (
     <div>
-      <section className="bg-gradient-to-b from-indigo-50 to-gray-50">
-        <div className="mx-auto max-w-5xl px-4 py-16 text-center sm:py-24">
-          <span className="inline-block rounded-full bg-indigo-100 px-3 py-1 text-xs font-medium text-indigo-700">
-            코드 없이 AI 이해하기
+      {/* Hero */}
+      <section className="relative overflow-hidden">
+        <div className="absolute inset-0 bg-gradient-to-b from-[#E50914]/5 via-[#141414] to-[#141414]" />
+        <div className="relative mx-auto max-w-6xl px-6 py-24 sm:py-36 text-center">
+          <span className="inline-block rounded-full border border-[#E50914]/40 bg-[#E50914]/10 px-4 py-1 text-xs font-medium text-[#E50914] mb-6">
+            코드 제로 · 부담 제로
           </span>
-          <h1 className="mt-4 text-3xl font-bold leading-tight text-gray-900 sm:text-5xl">
-            AI, 이제 <span className="text-indigo-600">영상으로</span> 가볍게
-            배우세요
+          <h1 className="text-4xl font-black leading-tight text-white sm:text-6xl lg:text-7xl">
+            AI, 이제<br />
+            <span className="text-[#E50914]">당신 차례</span>
           </h1>
-          <p className="mx-auto mt-4 max-w-xl text-gray-600">
-            숏폼부터 심화까지, 하루 25분이면 충분합니다. 비개발자를 위한
-            모바일 우선 AI 학습 플랫폼.
+          <p className="mx-auto mt-6 max-w-lg text-lg text-gray-400">
+            모르면 손해잖아. 하루 25분이면 AI가 내 편이 됩니다.
           </p>
-          <div className="mt-8 flex flex-col items-center justify-center gap-3 sm:flex-row">
+          <div className="mt-10 flex flex-col items-center justify-center gap-3 sm:flex-row">
             <ButtonLink href="/courses" size="lg">
-              강좌 둘러보기
+              지금 바로 시작
             </ButtonLink>
             <ButtonLink href="/auth/signup" size="lg" variant="outline">
-              무료로 시작하기
+              무료 가입
             </ButtonLink>
           </div>
         </div>
       </section>
 
-      <section className="mx-auto max-w-5xl px-4 py-14">
-        <div className="grid gap-6 sm:grid-cols-3">
+      {/* Features */}
+      <section className="mx-auto max-w-6xl px-6 py-16">
+        <div className="grid gap-4 sm:grid-cols-3">
           {FEATURES.map((f) => (
             <div
               key={f.title}
-              className="rounded-2xl border border-gray-100 bg-white p-6 text-center shadow-sm"
+              className="rounded-lg border border-[#333] bg-[#1f1f1f] p-6"
             >
-              <div className="text-3xl">{f.emoji}</div>
-              <h3 className="mt-3 font-semibold text-gray-900">{f.title}</h3>
-              <p className="mt-1 text-sm text-gray-500">{f.desc}</p>
+              <div className="text-3xl mb-3">{f.icon}</div>
+              <h3 className="font-bold text-white mb-1">{f.title}</h3>
+              <p className="text-sm text-gray-500">{f.desc}</p>
             </div>
           ))}
         </div>
       </section>
 
-      <section className="mx-auto max-w-5xl px-4 pb-20">
+      {/* Course preview */}
+      <section className="mx-auto max-w-6xl px-6 pb-24">
         <div className="mb-6 flex items-center justify-between">
-          <h2 className="text-xl font-bold text-gray-900">인기 강좌 미리보기</h2>
+          <h2 className="text-xl font-bold text-white">지금 뜨는 콘텐츠</h2>
           <ButtonLink href="/courses" variant="secondary" size="sm">
             전체 보기
           </ButtonLink>
         </div>
-        <div className="grid gap-6 sm:grid-cols-2">
+        <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
           {courses.map((course) => (
             <CourseCard key={course.courseId} course={course} />
           ))}

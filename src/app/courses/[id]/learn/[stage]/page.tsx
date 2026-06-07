@@ -40,13 +40,7 @@ export default function LearnPage({
   );
 }
 
-function LearnInner({
-  course,
-  stageIndex,
-}: {
-  course: Course;
-  stageIndex: number;
-}) {
+function LearnInner({ course, stageIndex }: { course: Course; stageIndex: number }) {
   const { user } = useAuth();
   const router = useRouter();
   const total = course.stages.length;
@@ -63,22 +57,14 @@ function LearnInner({
 
   const complete = useCallback(() => {
     if (!user) return;
-    const next = markStageComplete(
-      user.id,
-      course.courseId,
-      stageIndex,
-      total
-    );
+    const next = markStageComplete(user.id, course.courseId, stageIndex, total);
     setCompletedStages(next.completedStages);
   }, [user, course.courseId, stageIndex, total]);
 
   function handleNext() {
     complete();
-    if (isLast) {
-      router.push(`/courses/${course.courseId}`);
-    } else {
-      router.push(`/courses/${course.courseId}/learn/${stageIndex + 1}`);
-    }
+    if (isLast) router.push(`/courses/${course.courseId}`);
+    else router.push(`/courses/${course.courseId}/learn/${stageIndex + 1}`);
   }
 
   const liveCompleted = completedStages.includes(stageIndex)
@@ -91,23 +77,18 @@ function LearnInner({
 
   return (
     <div>
-      {/* 상단 진행 바 (항상 표시) */}
-      <div className="sticky top-14 z-30 border-b border-gray-100 bg-white">
+      {/* 상단 진행 바 */}
+      <div className="sticky top-16 z-30 border-b border-[#222] bg-[#141414]/95 backdrop-blur">
         <div className="mx-auto max-w-3xl px-4 py-3">
-          <div className="flex items-center justify-between text-sm">
-            <Link
-              href={`/courses/${course.courseId}`}
-              className="text-gray-400 hover:text-gray-700"
-            >
+          <div className="flex items-center justify-between text-sm mb-2">
+            <Link href={`/courses/${course.courseId}`} className="text-gray-500 hover:text-white transition-colors">
               ← {course.title}
             </Link>
-            <span className="text-gray-400">
-              {stageIndex + 1} / {total}
-            </span>
+            <span className="text-gray-600">{stageIndex + 1} / {total}</span>
           </div>
-          <div className="mt-2 h-1.5 w-full overflow-hidden rounded-full bg-gray-200">
+          <div className="h-1 w-full overflow-hidden rounded-full bg-[#333]">
             <div
-              className="h-full rounded-full bg-indigo-500 transition-all"
+              className="h-full rounded-full bg-[#E50914] transition-all"
               style={{ width: `${percent}%` }}
             />
           </div>
@@ -117,18 +98,14 @@ function LearnInner({
       <div className="mx-auto max-w-3xl space-y-6 px-4 py-6">
         <div className="flex items-center gap-2">
           <Badge type={stage.type} />
-          <h1 className="text-xl font-bold text-gray-900">{stage.title}</h1>
+          <h1 className="text-xl font-bold text-white">{stage.title}</h1>
         </div>
 
         {stage.type === "shortform" && (
           <ShortformStage videoUrl={stage.videoUrl!} title={stage.title} />
         )}
         {stage.type === "microlearning" && (
-          <MicrolearningStage
-            videoUrl={stage.videoUrl!}
-            title={stage.title}
-            summary={stage.summary ?? ""}
-          />
+          <MicrolearningStage videoUrl={stage.videoUrl!} title={stage.title} summary={stage.summary ?? ""} />
         )}
         {stage.type === "apply" && (
           <ApplyStage stage={stage} onQuizComplete={complete} />
@@ -137,11 +114,7 @@ function LearnInner({
 
         <div className="pt-2">
           <Button onClick={handleNext} size="lg" fullWidth>
-            {stage.type === "shortform" && stage.cta
-              ? stage.cta
-              : isLast
-                ? "강좌 완료하기"
-                : "다음 단계로"}
+            {stage.type === "shortform" && stage.cta ? stage.cta : isLast ? "완주하기 🎉" : "다음으로 →"}
           </Button>
         </div>
       </div>
@@ -149,32 +122,16 @@ function LearnInner({
   );
 }
 
-function ShortformStage({
-  videoUrl,
-  title,
-}: {
-  videoUrl: string;
-  title: string;
-}) {
+function ShortformStage({ videoUrl, title }: { videoUrl: string; title: string }) {
   return (
     <div>
       <VideoPlayer url={videoUrl} title={title} vertical />
-      <p className="mt-3 text-center text-sm text-gray-400">
-        45초 안에 핵심만! 다 봤다면 학습을 시작하세요.
-      </p>
+      <p className="mt-3 text-center text-sm text-gray-600">45초 안에 핵심만. 다 봤다면 다음으로 가세요.</p>
     </div>
   );
 }
 
-function MicrolearningStage({
-  videoUrl,
-  title,
-  summary,
-}: {
-  videoUrl: string;
-  title: string;
-  summary: string;
-}) {
+function MicrolearningStage({ videoUrl, title, summary }: { videoUrl: string; title: string; summary: string }) {
   return (
     <div className="space-y-4">
       <VideoPlayer url={videoUrl} title={title} />
@@ -183,18 +140,12 @@ function MicrolearningStage({
   );
 }
 
-function ApplyStage({
-  stage,
-  onQuizComplete,
-}: {
-  stage: Course["stages"][number];
-  onQuizComplete: () => void;
-}) {
+function ApplyStage({ stage, onQuizComplete }: { stage: Course["stages"][number]; onQuizComplete: () => void }) {
   return (
     <div className="space-y-6">
       {stage.quiz && (
         <div>
-          <h2 className="mb-3 text-sm font-semibold text-gray-700">퀴즈</h2>
+          <h2 className="mb-3 text-sm font-bold text-gray-300 uppercase tracking-wider">퀴즈</h2>
           <QuizSection quiz={stage.quiz} onComplete={onQuizComplete} />
         </div>
       )}
@@ -209,15 +160,13 @@ function DeepdiveStage({ stage }: { stage: Course["stages"][number] }) {
       <VideoPlayer url={stage.videoUrl!} title={stage.title} />
 
       {stage.chapters && stage.chapters.length > 0 && (
-        <div className="rounded-2xl border border-gray-100 bg-white p-4">
-          <p className="mb-2 text-sm font-semibold text-gray-900">챕터</p>
-          <ul className="space-y-1.5">
+        <div className="rounded-lg border border-[#333] bg-[#1f1f1f] p-4">
+          <p className="mb-3 text-sm font-bold text-gray-300 uppercase tracking-wider">챕터</p>
+          <ul className="space-y-2">
             {stage.chapters.map((ch, i) => (
               <li key={i} className="flex gap-3 text-sm">
-                <span className="w-12 shrink-0 font-mono text-indigo-600">
-                  {ch.time}
-                </span>
-                <span className="text-gray-600">{ch.title}</span>
+                <span className="w-12 shrink-0 font-mono text-[#E50914]">{ch.time}</span>
+                <span className="text-gray-400">{ch.title}</span>
               </li>
             ))}
           </ul>
@@ -225,19 +174,13 @@ function DeepdiveStage({ stage }: { stage: Course["stages"][number] }) {
       )}
 
       {stage.references && stage.references.length > 0 && (
-        <div className="rounded-2xl border border-gray-100 bg-white p-4">
-          <p className="mb-2 text-sm font-semibold text-gray-900">
-            더 알아보기
-          </p>
+        <div className="rounded-lg border border-[#333] bg-[#1f1f1f] p-4">
+          <p className="mb-3 text-sm font-bold text-gray-300 uppercase tracking-wider">더 파보기</p>
           <ul className="space-y-2">
             {stage.references.map((ref, i) => (
               <li key={i}>
-                <a
-                  href={ref.url}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-sm text-indigo-600 hover:underline"
-                >
+                <a href={ref.url} target="_blank" rel="noopener noreferrer"
+                  className="text-sm text-[#E50914] hover:text-red-400 hover:underline transition-colors">
                   {ref.title} ↗
                 </a>
               </li>
